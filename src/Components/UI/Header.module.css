@@ -1,0 +1,15 @@
+.header-div{
+    display: flex;
+    align-items: center;
+    background-color: brown;
+    color: white;
+}
+
+.cart{
+    margin-left: auto;
+    margin-right: 10rem;;
+}
+
+.header-title{
+    margin-left: 10rem;
+}
