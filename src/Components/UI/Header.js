@@ -10,7 +10,7 @@ const Header = (props) => {
             </h2>
         </div>
         <div className={classes['cart']}>
-            <h3>Your cart 2</h3>
+            <h3>Your cart <span className={classes['cart-count']}>2</span></h3>
         </div>
         </div>
         

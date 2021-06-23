@@ -1,0 +1,15 @@
+.container {
+    width: 45vw;
+    height: 15rem;
+    margin: 2rem auto;
+    text-align: center;
+    background-color: rgb(59, 58, 58);
+    padding: 1rem;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 5px 5px 10px black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}

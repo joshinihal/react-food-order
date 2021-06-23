@@ -1,0 +1,37 @@
+.item-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-details{
+    display: flex;
+    flex-direction: column;
+}
+
+.item-amount-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amount-quantity{
+    width: 2vw;
+}
+
+.item-price{
+    color: brown;
+}
+
+.add-btn{
+    background-color: darkred;
+    color: white;
+    border: none;
+    padding: 7px 25px;
+    border-radius: 13px;
+    cursor: pointer;
+}
+
+.horizontal-row{
+    margin: 1.5rem 0;
+}
