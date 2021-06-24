@@ -5,13 +5,13 @@ const LandingCard = (props) => {
     return (
         <div className={classes['container']}>
             <div>
-                <h1>{props.title}</h1>
+                <h1 className={classes['title']}>{props.title}</h1>
             </div>
             <div>
-                <span>{props.subtitle1}</span>
+                <p className={classes['subtitle']} >{props.subtitle1}</p>
             </div>
             <div>
-                <span>{props.subtitle2}</span>
+                <p className={classes['subtitle']} >{props.subtitle2}</p>
             </div>
         </div>
     )

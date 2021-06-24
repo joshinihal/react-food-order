@@ -7,13 +7,13 @@ const Item = (props) => {
       <div className={classes["item-container"]}>
         <div className={classes["item-details"]}>
           <span>
-            <b>Noodles</b>
+            <b>{props.title}</b>
           </span>
           <span>
-            <i>Fresh veggies and sauce</i>
+            <i>{props.ingredients}</i>
           </span>
           <span className={classes["item-price"]}>
-            <b>150 Rs.</b>
+            <b>{props.price} Rs.</b>
           </span>
         </div>
         <div className={classes["item-amount-div"]}>

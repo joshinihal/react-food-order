@@ -13,3 +13,12 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+@media (max-width: 500px) {
+    .title{
+        font-size: 20px;
+    }
+    .subtitle{
+        font-size: 13px;
+    }
+}
