@@ -1,7 +1,22 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import classes from "./Item.module.css";
+import CartContext from "../../store/cart-context";
+
 
 const Item = (props) => {
+
+  const cartCtx = useContext(CartContext);
+
+  const [itemAmount, setItemAmount] = useState(1);
+
+  const onAddBtn = () => {
+    cartCtx.addCartItem({id: props.id, title: props.title, price: props.price, amount: itemAmount});
+  };
+
+  const onAmountChange = (eve) => {
+    setItemAmount(eve.target.value);
+  };
+
   return (
     <React.Fragment>
       <div className={classes["item-container"]}>
@@ -16,20 +31,22 @@ const Item = (props) => {
             <b>{props.price} Rs.</b>
           </span>
         </div>
-        <div className={classes["item-amount-div"]}>
-          <span>
+        <div className={classes["item-amount-container"]}>
+          <div className={classes["item-amount-div"]}>
             <label htmlFor="quantity">
               <b>Amount</b>
-            </label>{" "}
+            </label>
             <input
+              min="0" 
+              onChange={onAmountChange}
+              value={itemAmount}
               type="number"
               id="quantity"
-              defaultValue="1"
               className={classes["amount-quantity"]}
             />
-          </span>
+          </div>
           <span>
-            <button className={classes["add-btn"]}>
+            <button disabled={itemAmount <= 0} onClick={onAddBtn} className={classes["add-btn"]}>
               <b>+ Add</b>
             </button>
           </span>

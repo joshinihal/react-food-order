@@ -8,11 +8,17 @@
     flex-direction: column;
 }
 
-.item-amount-div{
+.item-amount-container{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+.item-amount-div{
+    display: flex;
+    width: 8vw;
+    justify-content: space-around;
 }
 
 .amount-quantity{

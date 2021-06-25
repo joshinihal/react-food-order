@@ -13,6 +13,7 @@
     height: 3rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .cart-count{

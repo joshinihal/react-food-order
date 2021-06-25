@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from './Header.module.css';
+import CartContext from '../../store/cart-context';
 
 const Header = (props) => {
+
+    const cartCtx = useContext(CartContext);
+
+    const onCartClick = () => {
+        props.onCartClick();
+    };
+
+
     return (<header>
         <div className={classes['header-div']}>
         <div className={classes['header-title']}>
@@ -9,8 +18,8 @@ const Header = (props) => {
             ReactMeals
             </h2>
         </div>
-        <div className={classes['cart']}>
-            <h3>Your cart <span className={classes['cart-count']}>2</span></h3>
+        <div onClick={onCartClick} className={classes['cart']}>
+            <h3>Your cart <span className={classes['cart-count']}>{cartCtx.cartItems.length}</span></h3>
         </div>
         </div>
         

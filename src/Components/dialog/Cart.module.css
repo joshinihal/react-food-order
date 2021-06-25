@@ -1,9 +1,33 @@
+.backdrop{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0vh;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .cart-container{
     width: 30vw;
     background-color: white;
     border-radius: 14px;
     padding: 1rem;
-    margin: auto;
+    z-index: 10;
+    position: fixed;
+    top: 30vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.items-list{
+    max-height: 30vh;
+    overflow-y: scroll;
+}
+
+@media (max-width: 500px) {
+    .cart-container{
+        width: 45vw;
+    }
 }
 
 .amount-container{
