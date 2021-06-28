@@ -1,0 +1,38 @@
+.item-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.item-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.quantity-container {
+    display: flex;
+    justify-content: space-between;
+    width: 7vw;
+}
+
+.item-amount{
+    border: 1px solid black;
+    padding: 0 5px;
+}
+
+.quantity-change-btn{
+    margin: 0 0.3rem;
+    background-color: white;
+    color: darkred;
+    border: 1px solid darkred;
+    border-radius: 5px;
+    padding: 2px 13px;
+    cursor: pointer;
+}
+
+
+.horizontal-row{
+    margin-top: 1rem;
+}

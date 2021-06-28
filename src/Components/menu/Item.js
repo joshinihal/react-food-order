@@ -9,7 +9,7 @@ const Item = (props) => {
 
   const [itemAmount, setItemAmount] = useState(1);
 
-  const onAddBtn = () => {
+  const onAddBtnClick = () => {
     cartCtx.addCartItem({id: props.id, title: props.title, price: props.price, amount: itemAmount});
   };
 
@@ -46,7 +46,7 @@ const Item = (props) => {
             />
           </div>
           <span>
-            <button disabled={itemAmount <= 0} onClick={onAddBtn} className={classes["add-btn"]}>
+            <button type="button" disabled={itemAmount <= 0} onClick={onAddBtnClick} className={classes["add-btn"]}>
               <b>+ Add</b>
             </button>
           </span>

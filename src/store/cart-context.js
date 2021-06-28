@@ -11,12 +11,11 @@ export const CartContextProvider = (props) => {
 
     const addCartItem = (item) => {
         setCartItems((prevState)=>{
-            let tempArrOfPrevState = [...prevState];
+            let tempArrOfPrevState = JSON.parse(JSON.stringify([...prevState]));
             const index = tempArrOfPrevState.findIndex(el => el.id === item.id);
             if (index !== -1) {
                 const updatedAmount = Number(tempArrOfPrevState[index].amount) + Number(item.amount);
                 tempArrOfPrevState[index].amount = updatedAmount;
-                console.log('returning ', tempArrOfPrevState)
                 return tempArrOfPrevState;
             }
             return [...prevState, item];
@@ -24,7 +23,7 @@ export const CartContextProvider = (props) => {
     };
 
     return (
-        <CartContext.Provider value={{cartItems, addCartItem}} >
+        <CartContext.Provider value={{cartItems: cartItems, addCartItem}} >
             {props.children}
         </CartContext.Provider>
     )

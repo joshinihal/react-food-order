@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import "./App.css";
 import LandingCard from "./Components/landing-card/LandingCard";
 import ItemsList from "./Components/menu/ItemsList";
@@ -62,10 +62,14 @@ function App() {
     setShowCart(false);
   };
 
+  const onOrderClick = () => {
+    console.log('Ordering...');
+  };
+
   return (
     <React.Fragment>
       <Header onCartClick={onCartClick} />
-      {showCart && <Cart onCartClose={onCartCloseClick} />}
+      {showCart && <Cart onOrder={onOrderClick} onCartClose={onCartCloseClick} />}
       <LandingCard
         title="Delicious food, delivered to you."
         subtitle1="Choose your favourite meal from our broad selection of meals and enjoy a delicious lunch or dinner at home."

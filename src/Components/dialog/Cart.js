@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import reactDom from "react-dom";
 import classes from "./Cart.module.css";
 import CartContext from "../../store/cart-context";
+import CartItem from "./CartItem";
 
 const Backdrop = (props) => {
   const onCartClose = () => {
@@ -17,17 +18,8 @@ const ModalOverlay = (props) => {
     props.onCartClose();
   };
 
-  let totalAmount = 0;
-
-  const calculateTotal = (itemsArr) => {
-    if (itemsArr.length > 1) {
-      cartCtx.cartItems.reduce(
-        (accumulator, currentValue) =>
-          Number(accumulator) + Number(currentValue.price)
-      );
-    } else {
-      return 0;
-    }
+  const onOrder = () => {
+    props.onOrder();
   };
 
   return (
@@ -39,16 +31,13 @@ const ModalOverlay = (props) => {
         {cartCtx.cartItems.length > 0 &&
           cartCtx.cartItems.map((item) => {
             return (
-              <div key={item.id}>
-                <div className={classes["item-container"]}>
-                  <h3>{item.title}</h3>
-                  <div className={classes["quantity-container"]}>
-                    <span>{item.price}</span>
-                    <span>x {item.amount}</span>
-                  </div>
-                </div>
-                <hr className={classes["horizontal-row"]}></hr>
-              </div>
+              <CartItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                amount={item.amount}
+              />
             );
           })}
       </div>
@@ -58,16 +47,19 @@ const ModalOverlay = (props) => {
         <h2>
           {cartCtx.cartItems.length > 0
             ? cartCtx.cartItems.reduce((a, b) => ({
-                price: Number(a.price) + (Number(b.price) * Number(b.amount)),
+                price: Number(a.price) + Number(b.price) * Number(b.amount),
               })).price
-            : 0} Rs.
+            : 0}{" "}
+          Rs.
         </h2>
       </div>
       <div className={classes["btn-container"]}>
         <button onClick={onCartClose} className={classes["close-btn"]}>
           Close
         </button>
-        <button className={classes["order-btn"]}>Order</button>
+        <button onClick={onOrder} className={classes["order-btn"]}>
+          Order
+        </button>
       </div>
     </div>
   );
@@ -78,6 +70,10 @@ const Cart = (props) => {
     props.onCartClose();
   };
 
+  const onOrder = () => {
+    props.onOrder();
+  };
+
   return (
     <React.Fragment>
       {reactDom.createPortal(
@@ -85,7 +81,7 @@ const Cart = (props) => {
         document.getElementById("cart-modal")
       )}
       {reactDom.createPortal(
-        <ModalOverlay onCartClose={onCartClose} />,
+        <ModalOverlay onOrder={onOrder} onCartClose={onCartClose} />,
         document.getElementById("cart-modal")
       )}
     </React.Fragment>

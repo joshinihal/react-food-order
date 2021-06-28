@@ -24,6 +24,7 @@
     overflow-y: scroll;
 }
 
+
 @media (max-width: 500px) {
     .cart-container{
         width: 45vw;
@@ -33,22 +34,6 @@
 .amount-container{
     display: flex;
     justify-content: space-between;
-}
-
-.item-container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.horizontal-row{
-    margin-top: 1rem;
-}
-
-.quantity-container {
-    display: flex;
-    justify-content: space-between;
-    width: 7vw;
 }
 
 .order-btn{
