@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./Header.module.css";
 import CartContext from "../../store/cart-context";
 
 const Header = (props) => {
+  const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
   const cartCtx = useContext(CartContext);
 
   const onCartClick = () => {
@@ -11,7 +12,26 @@ const Header = (props) => {
 
   const numberOfCartItems = cartCtx.cartItems.reduce((a, b) => {
     return a + Number(b.amount);
-   }, 0);
+  }, 0);
+
+  const cartClasses = `${classes.cart} ${btnIsHighlighted ? classes.bump : ""}`;
+
+  const { cartItems } = cartCtx;
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      return;
+    }
+    setBtnIsHighlighted(true);
+
+    const timer = setTimeout(() => {
+      setBtnIsHighlighted(false);
+    }, 300);
+
+    // a cleanup function can returned in useEffect which clears the timer incase component is removed
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [cartItems]);
 
   return (
     <React.Fragment>
@@ -20,12 +40,10 @@ const Header = (props) => {
           <div className={classes["header-title"]}>
             <h2>ReactMeals</h2>
           </div>
-          <div onClick={onCartClick} className={classes["cart"]}>
+          <div onClick={onCartClick} className={cartClasses}>
             <h3>
               Your cart{" "}
-              <span className={classes["cart-count"]}>
-                  {numberOfCartItems}
-              </span>
+              <span className={classes["cart-count"]}>{numberOfCartItems}</span>
             </h3>
           </div>
         </div>

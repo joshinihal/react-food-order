@@ -9,10 +9,9 @@ const CartContext = React.createContext({
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
-    // concat is equivalent of JSON.parse(JSON.stringify([...state.cartItems]))
-    // when passed nothing in concat, it will create a new array, without replacing existing
     const index = state.cartItems.findIndex((el) => el.id === action.item.id);
     const existingItem = state.cartItems[index];
+
     let updatedItems;
     if (existingItem) {
       const updatedItem = {
@@ -22,12 +21,27 @@ const cartReducer = (state, action) => {
       updatedItems = [...state.cartItems];
       updatedItems[index] = updatedItem;
     } else {
+      // concat is equivalent of JSON.parse(JSON.stringify([...state.cartItems]))
+      // when passed nothing in concat, it will create a new array, without replacing existing
       updatedItems = state.cartItems.concat(action.item);
     }
-    const totalAmount =
+    const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
-    return { cartItems: updatedItems, totalAmount: totalAmount };
+    return { cartItems: updatedItems, totalAmount: updatedTotalAmount };
   } else if (action.type === "REMOVE") {
+    const index = state.cartItems.findIndex((el) => el.id === action.id);
+    const existingItem = state.cartItems[index];
+
+    const updatedTotalAmount = state.totalAmount - existingItem.price;
+    let updatedItems;
+    if (existingItem.amount === 1) {
+      updatedItems = state.cartItems.filter((el) => el.id !== action.id);
+    } else {
+      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+      updatedItems = [...state.cartItems];
+      updatedItems[index] = updatedItem;
+    }
+    return { cartItems: updatedItems, totalAmount: updatedTotalAmount };
   }
 };
 

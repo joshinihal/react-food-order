@@ -11,7 +11,7 @@ const CartItem = (props) => {
   };
 
   const onRemoveBtnClick = () => {
-    props.onRemoveBtnClick(props.id);
+    cartCtx.removeCartItem(props.id);
   };
 
   return (
