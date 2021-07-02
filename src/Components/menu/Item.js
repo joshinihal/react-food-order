@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useRef} from "react";
 import classes from "./Item.module.css";
 import CartContext from "../../store/cart-context";
 
@@ -7,15 +7,24 @@ const Item = (props) => {
 
   const cartCtx = useContext(CartContext);
 
-  const [itemAmount, setItemAmount] = useState(1);
+  const amountInputRef = useRef();
+
+  // const [itemAmount, setItemAmount] = useState(1);
+  const [isAmountValid, setIsAmountValid] = useState(true);
 
   const onAddBtnClick = () => {
-    cartCtx.addCartItem({id: props.id, title: props.title, price: props.price, amount: itemAmount});
+    const enteredAmount = amountInputRef.current.value;
+    if(enteredAmount < 1 || enteredAmount > 5 || enteredAmount.trim().length === 0) {
+      setIsAmountValid(false);
+    } else {
+      const enteredAmountNumber = +amountInputRef.current.value;
+      cartCtx.addCartItem({id: props.id, title: props.title, price: props.price, amount: enteredAmountNumber});
+    }
   };
 
-  const onAmountChange = (eve) => {
-    setItemAmount(eve.target.value);
-  };
+  // const onAmountChange = (eve) => {
+  //   setItemAmount(eve.target.value);
+  // };
 
   return (
     <React.Fragment>
@@ -37,21 +46,23 @@ const Item = (props) => {
               <b>Amount</b>
             </label>
             <input
-              min="0" 
-              onChange={onAmountChange}
-              value={itemAmount}
+              ref={amountInputRef}
+              min="1" 
+              max="5"
+              defaultValue="1"
               type="number"
               id="quantity"
               className={classes["amount-quantity"]}
             />
           </div>
           <span>
-            <button type="button" disabled={itemAmount <= 0} onClick={onAddBtnClick} className={classes["add-btn"]}>
+            <button type="button" onClick={onAddBtnClick} className={classes["add-btn"]}>
               <b>+ Add</b>
             </button>
           </span>
         </div>
       </div>
+      {!isAmountValid && <p>Please enter a valid number (1-5).</p>}
       <hr className={classes["horizontal-row"]}></hr>
     </React.Fragment>
   );

@@ -1,3 +1,9 @@
+.header-container{
+    position: sticky;
+    top: 0;
+}
+
+
 .header-div{
     display: flex;
     align-items: center;

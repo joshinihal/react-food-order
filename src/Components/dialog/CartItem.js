@@ -25,6 +25,18 @@ const CartItem = (props) => {
           </div>
         </div>
         <div>
+
+
+      {/* If we want to pass params to click 
+      We can't just write ...
+      onRemove={cartItemRemoveHandler(item.id)}
+      ... since this would call the function immediately (and not when the cart item is clicked).
+      So, if we want to pass params, we can either use bind (the first param is not used here, so we can write anything in this place) ...
+      onRemove={cartItemRemoveHandler.bind(null, item.id)}
+      ..., or we can create an anonymous function:
+      onRemove={() => cartItemRemoveHandler(item.id)}
+      Both options are equivalent. */}
+
           <button
             onClick={onRemoveBtnClick}
             className={classes["quantity-change-btn"]}

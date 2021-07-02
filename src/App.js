@@ -4,6 +4,7 @@ import LandingCard from "./Components/landing-card/LandingCard";
 import ItemsList from "./Components/menu/ItemsList";
 import Header from "./Components/UI/Header";
 import Cart from './Components/dialog/Cart';
+import Background from "./Components/UI/Background";
 
 const menuItems = [
   {
@@ -69,6 +70,7 @@ function App() {
   return (
     <React.Fragment>
       <Header onCartClick={onCartClick} />
+        <Background />
       {showCart && <Cart onOrder={onOrderClick} onCartClose={onCartCloseClick} />}
       <LandingCard
         title="Delicious food, delivered to you."

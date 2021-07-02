@@ -3,7 +3,7 @@ import classes from './LandingCard.module.css';
 
 const LandingCard = (props) => {
     return (
-        <div className={classes['container']}>
+        <section className={classes['container']}>
             <div>
                 <h1 className={classes['title']}>{props.title}</h1>
             </div>
@@ -13,7 +13,7 @@ const LandingCard = (props) => {
             <div>
                 <p className={classes['subtitle']} >{props.subtitle2}</p>
             </div>
-        </div>
+        </section>
     )
 };
 

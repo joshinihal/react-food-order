@@ -1,0 +1,12 @@
+
+.background-image{
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+
+.background-image-conatiner{
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+}

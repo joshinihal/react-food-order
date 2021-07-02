@@ -22,6 +22,8 @@ const ModalOverlay = (props) => {
     props.onOrder();
   };
 
+  const totalAmount = cartCtx.totalAmount.toFixed(2);
+
   return (
     <div className={classes["cart-container"]}>
       {cartCtx.cartItems.length === 0 && (
@@ -45,11 +47,7 @@ const ModalOverlay = (props) => {
       <div className={classes["amount-container"]}>
         <h2>Total Amount</h2>
         <h2>
-          {cartCtx.cartItems.length > 0
-            ? cartCtx.cartItems.reduce((a, b) => ({
-                price: Number(a.price) + Number(b.price) * Number(b.amount),
-              })).price
-            : 0}{" "}
+          {totalAmount}
           Rs.
         </h2>
       </div>
