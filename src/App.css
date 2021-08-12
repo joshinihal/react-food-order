@@ -1,0 +1,19 @@
+.error-msg {
+    text-align: center;
+    color: white;
+}
+
+.loading-msg {
+    text-align: center;
+    color: white;
+}
+
+.retry-btn {
+    background-color: darkred;
+    color: white;
+    border: none;
+    padding: 7px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 0 0.3rem;
+}

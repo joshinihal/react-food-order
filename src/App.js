@@ -1,59 +1,36 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./App.css";
 import LandingCard from "./Components/landing-card/LandingCard";
 import ItemsList from "./Components/menu/ItemsList";
 import Header from "./Components/UI/Header";
 import Cart from './Components/dialog/Cart';
 import Background from "./Components/UI/Background";
-
-const menuItems = [
-  {
-    id: 0,
-    title: 'Noodles',
-    ingredients: 'Fresh veggies and sauce',
-    price: '150',
-  },
-  {
-    id: 1,
-    title: 'Sandwich',
-    ingredients: 'Fresh bread and veggies',
-    price: '100',
-  },
-  {
-    id: 2,
-    title: 'Pasta',
-    ingredients: 'Mac and cheese',
-    price: '150',
-  },
-  {
-    id: 3,
-    title: 'Pav Bhaji',
-    ingredients: 'Masala Pav and spicy veggies',
-    price: '120',
-  },
-  {
-    id: 4,
-    title: 'Pizza',
-    ingredients: 'Margerita and oregano',
-    price: '200',
-  },
-  {
-    id: 5,
-    title: 'Momos',
-    ingredients: 'Fried with schezwan sauce',
-    price: '80',
-  },
-  {
-    id: 6,
-    title: 'Fries',
-    ingredients: 'Classic and peri peri',
-    price: '120',
-  },
-];
+import useHttp from "./hooks/use-http";
+import apiBaseUrl from './config';
 
 function App() {
 
+  const url = `${apiBaseUrl}/meals.json`;
   const [showCart, setShowCart] = useState(false);
+  const [menuItems, setMenuItems] = useState([]);
+  const {sendRequest: fetchMealsData, error, isLoading} = useHttp();
+
+  useEffect(()=>{
+    const transformMeals = (menus) => {
+      let menuItemsArray = [];
+      for (const mealKey in menus){
+        menuItemsArray.push({
+          id: mealKey,
+          title: menus[mealKey].title,
+          ingredients: menus[mealKey].ingredients,
+          price: menus[mealKey].price,
+        });
+      }
+      setMenuItems(menuItemsArray);
+    };
+
+    fetchMealsData(url, transformMeals);
+  }, [fetchMealsData]);
 
   const onCartClick = () => {
     setShowCart(true);
@@ -67,6 +44,24 @@ function App() {
     console.log('Ordering...');
   };
 
+  const onRetry = () => {
+    fetchMealsData();
+  };
+
+  let content = '';
+
+  if (error) {
+    content = <><p className="error-msg">{error}</p><div className="error-msg"><button className="retry-btn" onClick={onRetry}>Try Again</button></div></>;
+  };
+
+  if (isLoading) {
+    content = <p className="loading-msg">Loading...</p>;
+  };
+
+  if (menuItems.length > 0) {
+    content = <ItemsList menuItems={menuItems} />;
+  };
+
   return (
     <React.Fragment>
       <Header onCartClick={onCartClick} />
@@ -77,7 +72,7 @@ function App() {
         subtitle1="Choose your favourite meal from our broad selection of meals and enjoy a delicious lunch or dinner at home."
         subtitle2="All our meals are cooked with healthy ingredients, just in time and of course by experienced chefs."
       />
-      <ItemsList menuItems={menuItems} />
+      {content}
     </React.Fragment>
   );
 }

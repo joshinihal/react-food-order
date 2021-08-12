@@ -14,7 +14,7 @@
     padding: 1rem;
     z-index: 10;
     position: fixed;
-    top: 30vh;
+    top: 5vh;
     left: 50%;
     transform: translate(-50%, 0);
 }
